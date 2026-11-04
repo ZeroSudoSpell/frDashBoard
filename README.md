@@ -1,6 +1,8 @@
 # Firmware Release Dashboard
 
-A full-stack **TypeScript** recreation of an internal firmware CI/CD portal: a REST API that records
+This repo is strictly for learning purposes by me.
+
+A full-stack **TypeScript** recreation of a firmware CI/CD portal: a REST API that records
 builds from CI pipelines and promotes them through release stages, plus a React dashboard that
 visualises release history, fleet load, and build status across product lines.
 
