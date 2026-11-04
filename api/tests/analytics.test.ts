@@ -11,8 +11,11 @@ beforeAll(connectTestDb);
 afterEach(clearTestDb);
 afterAll(disconnectTestDb);
 
+let releaseSeq = 0;
 async function seedRelease(stage: 'alpha' | 'beta' | 'rc' | 'release', daysAgo: number) {
-  const b = await seedBuild({ status: 'success', stage });
+  // Each release needs its own version: (project, board, version, stage) is unique by design.
+  releaseSeq += 1;
+  const b = await seedBuild({ status: 'success', stage, version: `9.00.${String(releaseSeq).padStart(4, '0')}` });
   return Release.create({
     project: b.project,
     version: b.version,

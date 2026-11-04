@@ -1,6 +1,9 @@
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { resetTransactionSupportCache } from '../src/services/releases.js';
+import '../src/models/Project.js';
+import '../src/models/Build.js';
+import '../src/models/Release.js';
 
 let replSet: MongoMemoryReplSet | undefined;
 
@@ -20,6 +23,8 @@ export async function connectTestDb() {
     replSet = await MongoMemoryReplSet.create({ replSet: { count: 1, storageEngine: 'wiredTiger' } });
     await mongoose.connect(replSet.getUri('frd_test'));
   }
+  // Build unique indexes up front so duplicate-key tests don't race index creation.
+  await mongoose.connection.syncIndexes();
   resetTransactionSupportCache();
 }
 
