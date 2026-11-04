@@ -1,0 +1,16 @@
+{
+  "name": "firmware-release-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Full-stack TypeScript firmware build & release dashboard: Express + Mongoose REST API with OpenAPI docs, React dashboard, Docker Compose, CI.",
+  "workspaces": ["api", "web"],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "seed": "npm run seed -w api"
+  },
+  "engines": { "node": ">=20" }
+}

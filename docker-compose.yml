@@ -1,0 +1,51 @@
+services:
+  mongo:
+    image: mongo:7
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # One-shot: initialise the single-node replica set so transactions work.
+  mongo-init:
+    image: mongo:7
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    entrypoint: >
+      mongosh --host mongo --quiet --eval
+      "try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0', members:[{_id:0, host:'mongo:27017'}]}) }"
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      PORT: 4000
+      MONGO_URI: mongodb://mongo:27017/firmware_dashboard?replicaSet=rs0
+      CORS_ORIGIN: http://localhost:8080
+      LOG_LEVEL: info
+    depends_on:
+      mongo-init:
+        condition: service_completed_successfully
+    ports:
+      - "4000:4000"
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo_data:
