@@ -10,7 +10,7 @@ The original system is a Python/Flask + Jinja portal used daily by ~400 engineer
 the core of it on a modern TypeScript stack to make the same ideas — gated promotion, aggregation-driven
 analytics, documented APIs — explicit and testable.
 
-[![CI](https://github.com/ZeroSudoSpell/TypeScriptRecreation/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroSudoSpell/TypeScriptRecreation/actions/workflows/ci.yml)
+[![CI](https://github.com/ZeroSudoSpell/frDashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroSudoSpell/frDashboard/actions/workflows/ci.yml)
 
 ## Stack
 
