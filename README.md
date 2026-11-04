@@ -12,6 +12,14 @@ analytics, documented APIs — explicit and testable.
 
 [![CI](https://github.com/ZeroSudoSpell/frDashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroSudoSpell/frDashboard/actions/workflows/ci.yml)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/dashboard-dark.png">
+  <img alt="Firmware Release Dashboard: summary tiles, stacked release-history chart by stage, build load per CI node, and a filterable builds table" src="docs/dashboard-light.png">
+</picture>
+
+<sub>Running locally against the seed data (<code>npm run seed</code>). Light and dark themes follow your system setting.</sub>
+
+
 ## Stack
 
 | Layer | Choice | Why |
